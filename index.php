@@ -14,7 +14,7 @@ $db -> exec(
   //Account ID is used to keep track of what the user does. and make it easy to find the right user.
 
 //Create Posts table
-$db->exec('CREATE TABLE Posts (
+$db->exec('CREATE TABLE IF NOT EXISTS Posts (
     PostID INTEGER PRIMARY KEY AUTOINCREMENT,
     AccountID INTEGER,
     Content TEXT,
@@ -23,7 +23,7 @@ $db->exec('CREATE TABLE Posts (
 )');
 //PostID is used for moderation so we can easily send the post to a list
 //Create Comments Table
-$db->exec('CREATE TABLE Comments (
+$db->exec('CREATE TABLE IF NOT EXISTS Comments (
     CommentID INTEGER PRIMARY KEY AUTOINCREMENT,
     PostID INTEGER, 
     AccountID INTEGER,
