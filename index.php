@@ -1,3 +1,10 @@
+
+<html>
+<h1>
+    Chirp
+</h1>
+
+</html>
 <?php
 //Create and connect to database
 $db = new SQLite3("chirpbase.sq3");
@@ -21,7 +28,7 @@ $db->exec('CREATE TABLE IF NOT EXISTS Posts (
     Likes INTEGER,
     FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
 )');
-//PostID is used for moderation so we can easily send the post to a list
+//PostID and CommentID is used for moderation and organization.
 //Create Comments Table
 $db->exec('CREATE TABLE IF NOT EXISTS Comments (
     CommentID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,6 +39,9 @@ $db->exec('CREATE TABLE IF NOT EXISTS Comments (
     FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
     FOREIGN KEY (PostID) REFERENCES Posts(PostID)
 )'); 
+
+
+
 
  /* 
   $sql = "INSERT INTO Accounts (Name, Email, Password, FollowerCount, FollowedCount) VALUES ('$name', '$email', '$password', $follower_count, $followed_count)";
