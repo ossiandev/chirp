@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+/*     ///////////////////////////////////       */
+.headerTextTitle{
+        padding-left:1em;
+        font-family: 'Open Sans', sans-serif;
+        color: #F8FCFB;
+}
+.headerTextLogin{
+    background-color: #C9FDD7;
+    color: #6892D5;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.headerStyle{
+    background-color: #6892D5;
+  color: #C9FDD7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+

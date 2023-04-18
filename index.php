@@ -1,9 +1,31 @@
 
 <html>
-<h1>
-    Chirp
-</h1>
 
+<head>
+    <title>
+
+    Chirp
+    </title>
+    <link rel="stylesheet" href="indexstyle.css">
+    
+</head>
+
+<body>
+    <header class="headerStyle">
+       <div>
+            <h1 class="headerTextTitle">Chirp</h1>  
+            <button class="headerTextLogin">Login</button>
+
+        </div>
+    </header>
+    <div>
+
+    </div>
+    <footer>
+
+    </footer>
+
+</body>
 </html>
 <?php
 //Create and connect to database
@@ -47,6 +69,6 @@ $db->exec('CREATE TABLE IF NOT EXISTS Comments (
   $sql = "INSERT INTO Accounts (Name, Email, Password, FollowerCount, FollowedCount) VALUES ('$name', '$email', '$password', $follower_count, $followed_count)";
    */
 // close the database connection
-$db->close();
+$db->close(); 
 
 ?>
