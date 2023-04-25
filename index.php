@@ -13,8 +13,12 @@
 <body>
     <header class="headerStyle">
        <div>
-            <h1 class="headerTextTitle">Chirp</h1>  
-            <button class="headerTextLogin">Login</button>
+            <h1 class="headerTextTitle">
+                Chirp
+            </h1>  
+            <a href="login.php"class="headerTextLogin">
+                Login
+            </a>
 
         </div>
     </header>

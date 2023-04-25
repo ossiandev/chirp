@@ -9,6 +9,7 @@ body{
         padding-left:1em;
         font-family: 'Open Sans', sans-serif;
         color: #F8FCFB;
+        user-select: none;
 }
 .headerTextLogin{
     background-color: #C9FDD7;
@@ -17,12 +18,15 @@ body{
     padding: 10px 20px;
     border-radius: 5px;
 }
+.headerTextLogin a{
+    color: #F8FCFB ;
+}
 .headerStyle{
     background-color: #6892D5;
   color: #C9FDD7;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 20px;
 }
 
