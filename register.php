@@ -19,9 +19,9 @@
         <br>
         email: <input type="text" name="email"> 
         <br>
-        password: <input type="text" name="password">
+        password: <input type="password" name="password">
         <br>
-        confirm password: <input type="text" name="confirmPassword">
+        confirm password: <input type="password" name="confirmPassword">
         <input type="submit">
         </form>
 

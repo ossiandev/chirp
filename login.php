@@ -1,3 +1,16 @@
+<?php
+$db = new SQLITE3 ('chirpbase.sq3');
+$i = 0;
+$accountList = $db -> query("SELECT * FROM ACCOUNTS");
+while($row = $accountList ->fetchArray(SQLITE3_ASSOC))
+{
+    $email[$i] = $row['Email'];
+    $name[$i] = $row['Name'];
+    $password[$i] = $row['Password'];
+}
+?>
+
+
 <html>
     <head>
 <link rel="stylesheet" href="standardstyle.css">
@@ -14,10 +27,12 @@
 
         </header>
         <form action="loginreg.php" method="POST">
-        username: <input type="text" name="variabel1">
+        username/email: <input type="text" name="username">
         <br>
-        password: <input type="text" name="variabel2">
-        <input type="submit">
+        password: <input type="password" name="password">
+        <input type="submit" name ="submit" value="continue">
+        <!--send all the users to loginreg.php-->
+        <input type="hidden" name="nameList" value=<?php echo $name?>>
         </form>
         <h4>Don't have an account yet?</h4>
         <a href="register.php">
@@ -26,3 +41,4 @@
     </body>
 
 </html>
+
