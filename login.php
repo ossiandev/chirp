@@ -1,7 +1,13 @@
 <?php
+//start session so i can move data between the pages.
+session_start();
+//connect to database
 $db = new SQLITE3 ('chirpbase.sq3');
+//set index
 $i = 0;
+//prepare the account table
 $accountList = $db -> query("SELECT * FROM ACCOUNTS");
+//Fetch all the nesscesary information from the database.
 while($row = $accountList ->fetchArray(SQLITE3_ASSOC))
 {
     $email[$i] = $row['Email'];
@@ -26,14 +32,16 @@ while($row = $accountList ->fetchArray(SQLITE3_ASSOC))
             </div>
 
         </header>
-        <form action="loginreg.php" method="POST">
-        username/email: <input type="text" name="username">
-        <br>
-        password: <input type="password" name="password">
-        <input type="submit" name ="submit" value="continue">
-        <!--send all the users to loginreg.php-->
-        <input type="hidden" name="nameList" value=<?php echo $name?>>
-        </form>
+        <div>
+          <form action="login.php" method="POST">
+            username/email: <input type="text" name="username" maxlength="64" required>
+          <br>
+             password: <input type="password" name="password" maxlength="32" required>
+          <br>
+           <input type="submit" name ="submit" value="continue" >
+          </form>
+        </div>
+
         <h4>Don't have an account yet?</h4>
         <a href="register.php">
             Register here!
@@ -41,4 +49,16 @@ while($row = $accountList ->fetchArray(SQLITE3_ASSOC))
     </body>
 
 </html>
+
+<?php
+
+
+$password = $_POST["password"];
+$name = $_POST["username"];
+if(isset($_POST['submit']))
+{
+    
+
+}
+?>
 

@@ -19,7 +19,9 @@
             <a href="login.php"class="headerTextLogin">
                 Login
             </a>
-
+            <a href="register.php"class="headerTextLogin">
+                Register
+            </a>
         </div>
     </header>
     <div>
