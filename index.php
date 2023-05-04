@@ -34,6 +34,7 @@
 </body>
 </html>
 <?php
+session_start();
 //Create and connect to database
 $db = new SQLite3("chirpbase.sq3");
 //Create account table if it doesn't already exist
@@ -67,7 +68,17 @@ $db->exec('CREATE TABLE IF NOT EXISTS Comments (
     FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
     FOREIGN KEY (PostID) REFERENCES Posts(PostID)
 )'); 
-
+$db->exec('CREATE TABLE IF NOT EXISTS Notifications (
+    PostID INTEGER, 
+    PosterID INTEGER,
+    MentionedID INTEGER,
+    Content TEXT,
+    FOREIGN KEY (PosterID) REFERENCES Accounts(AccountID),
+    FOREIGN KEY (PostID) REFERENCES Posts(PostID),
+    FOREIGN KEY (MentionedID) REFERENCES Accounts(AccountID),
+    FOREIGN KEY (Content) REFERENCES Posts(Content)
+    
+)'); 
 
 
 
