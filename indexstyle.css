@@ -3,7 +3,10 @@ body{
     padding: 0;
 }
 
-
+.backgroundcolorclass{
+    background: linear-gradient(120deg, #2980b9,#8e44ad);
+    
+}
 /*     ///////////////////////////////////       */
 .headerTextTitle{
         padding-left:1em;
@@ -22,7 +25,7 @@ body{
     color: #F8FCFB ;
 }
 .headerStyle{
-    background-color: #6892D5;
+  background-color: #6892D5;
   color: #C9FDD7;
   display: flex;
   justify-content: space-between;

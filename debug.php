@@ -51,6 +51,7 @@ $nameList = $db->query("Select * from Accounts;");
 while($row = $nameList->fetchArray(SQLITE3_ASSOC))
 {
    $names[$i]= $row['Name'];
+   $passwords[$i] = $row['Password'];
    $id[$i] = $row['AccountID'];
    $i++;
 }
@@ -59,7 +60,7 @@ while($row = $nameList->fetchArray(SQLITE3_ASSOC))
 
 for($i = 0; $i < sizeof($names); $i++)
 {
-    echo "$names[$i], $id[$i] "; 
+    echo "$names[$i], $id[$i], $passwords[$i] "; 
     echo "<br>";
 }
 

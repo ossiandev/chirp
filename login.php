@@ -1,6 +1,6 @@
 <?php
-//start session so i can move data between the pages.
-session_start();
+
+
 //Create and connect to database
 $db = new SQLite3("chirpbase.sq3");
 //Create account table if it doesn't already exist
@@ -45,17 +45,6 @@ $db->exec('CREATE TABLE IF NOT EXISTS Notifications (
     FOREIGN KEY (Content) REFERENCES Posts(Content)
     
 )');
-//set index
-$i = 0;
-//prepare the account table
-$accountList = $db -> query("SELECT * FROM ACCOUNTS");
-//Fetch all the nesscesary information from the database.
-while($row = $accountList ->fetchArray(SQLITE3_ASSOC))
-{
-    $email[$i] = $row['Email'];
-    $name[$i] = $row['Name'];
-    $password[$i] = $row['Password'];
-}
 ?>
 
 
@@ -80,6 +69,10 @@ while($row = $accountList ->fetchArray(SQLITE3_ASSOC))
           <br>
              password: <input type="password" name="password" maxlength="32" required>
           <br>
+          <?php
+          if(isset($_POST['submit'])){
+              echo "Wrong name or password!";
+          } ?> 
            <input type="submit" name ="submit" value="continue" >
           </form>
         </div>
@@ -95,12 +88,52 @@ while($row = $accountList ->fetchArray(SQLITE3_ASSOC))
 <?php
 
 
-$password = $_POST["password"];
-$name = $_POST["username"];
+
 if(isset($_POST['submit']))
 {
+    echo "Button pressed! <br>";
+
+    $password = ($_POST["password"]);
+    $username = ($_POST["username"]);
+    //prepare sql statement because it protects the application from SQL injections.
+    $stmt = $db->prepare('SELECT * FROM ACCOUNTS WHERE  Name = :name AND Password = :password');
+    //bind the parameters with the input from user.i made in the prepare.
+    $stmt -> bindParam(':name',$username);
+    $stmt -> bindParam(':password',$password);
+
+    $result = $stmt->execute();
+    $row = $result->fetchArray();
+    if($row != false)
+    {
+        $name = $row['Name'];
+        if($name)
+        {
+            echo "Name was found! <br>";
+            // name matches!
+            if($password)
+            {
+                // exists with username 
+                echo "Password matches! <br>";
+
+              // Login is successful and set $_SESSION['accountid']
+                session_start();
+                $_SESSION['accountid'] = $row['AccountID'];
+                header("Location: index.php");
+                echo "Success!";
+            }
+        
+        }
+        else
+        {
+            // username doesnt exist or wrong name 
+            echo "Username doesn't exist! <br>";
     
+        }
+    
+    }
+
 
 }
 ?>
+
 

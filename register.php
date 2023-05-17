@@ -34,6 +34,7 @@ $db->exec('CREATE TABLE IF NOT EXISTS Comments (
     FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
     FOREIGN KEY (PostID) REFERENCES Posts(PostID)
 )'); 
+//Create Table for notifications
 $db->exec('CREATE TABLE IF NOT EXISTS Notifications (
     PostID INTEGER, 
     PosterID INTEGER,
@@ -46,9 +47,9 @@ $db->exec('CREATE TABLE IF NOT EXISTS Notifications (
     
 )');
 
-$matchingPasswords = false;
-$usedEmail = true;
-$usedUsername = true;
+$matchingPasswords = true;
+$usedEmail = false;
+$usedUsername = false;
 
 
 ?> 
@@ -124,17 +125,55 @@ $email = trim($email);
 $password = trim($password); 
 $confirmPassword = trim($confirmPassword); 
 $username = trim($username); 
+
 if(!($password == $confirmPassword)){
     $matchingPasswords = false;
 }
+else
+{
+    //prepare query for email search 
+    $stmt = $db->prepare('SELECT * FROM ACCOUNTS WHERE = :email');
+    //bind the parameters with the input from user.i made in the prepare.
+    $stmt -> bindParam(':email',$email);
+    $result = $stmt->execute();
+    $row = $result->fetchArray();
+    if($row != false)
+    {
+        if($email == $row['email'])
+        {
+            //email exists already abort mission!
+            $usedEmail = true;
+        }
+    else
+    {
+        //email doesnt exist it's fine!
+        //prepare query for email search 
+    $stmt = $db->prepare('SELECT * FROM ACCOUNTS WHERE = :username');
+    //bind the parameters with the input from user.i made in the prepare.
+    $stmt -> bindParam(':username',$username);
+    $result = $stmt->execute();
+    $row = $result->fetchArray();
 
-//prepare query for username search 
-$inputQuery = "Select * from Accounts where Name = '".$username."';";
-//execute query
-$output = $db->query($inputQuery);
-//check if there is already existing account for username
+    if($username == $row['Name'])
+    {
+        //username exists already abort mission!
+        $usedUsername = true;
+    }
+    else
+    {
+        // everything is checked! create account!
 
-$db -> exec("Insert Into Accounts (Name, Email, password) values ('".$username. "', '" .$email. "', '" .$password.  "');"); 
+        $db -> exec("Insert Into Accounts (Name, Email, password) values ('".$username. "', '" .$email. "', '" .$password.  "');"); 
+
+    }
+    } 
+    
+    }
+
+}
+
+
+
 //debug test next time
 }
 
